@@ -200,10 +200,9 @@ $(document).ready(function () {
 <h2>Loading and preprocessing the data</h2>
 <pre class="r"><code>#Unzip the data folder
 zip_in &lt;-  &quot;C:/Users/jorge_000/Desktop/ONLINE_COURSES/DATA_SCIENCE_COURSERA/5_REPROD_RESEARCH/RepData_PeerAssessment1/activity.zip&quot;
-out &lt;- &quot;C:/Users/jorge_000/Desktop/ONLINE_COURSES/DATA_SCIENCE_COURSERA/5_REPROD_RESEARCH/RepData_PeerAssessment1/activity&quot;
-unzip(zip_in,exdir = out)
-
-##Read the data
+zip_out &lt;- &quot;C:/Users/jorge_000/Desktop/ONLINE_COURSES/DATA_SCIENCE_COURSERA/5_REPROD_RESEARCH/RepData_PeerAssessment1/activity&quot;
+unzip(zip_in,zip_out)</code></pre>
+<pre class="r"><code>##Read the data
 activity &lt;- read.csv(&quot;activity/activity.csv&quot;,header = TRUE,na.strings = c(&quot;NA&quot;,&quot;&lt;NA&gt;&quot;))
 
 #Visualising the data
@@ -443,18 +442,8 @@ table(activity3$weekdays) </code></pre>
 <pre class="r"><code>average_weekdays &lt;- activity3 %&gt;%
     group_by(interval,weekdays) %&gt;%
     summarise(mean_steps = mean(steps))
-head(average_weekdays)</code></pre>
-<pre><code># A tibble: 6 x 3
-# Groups:   interval [3]
-  interval weekdays mean_steps
-     &lt;int&gt; &lt;chr&gt;         &lt;dbl&gt;
-1        0 week           6.65
-2        0 weekend        8.07
-3        5 week           5.03
-4        5 weekend        8.07
-5       10 week           4.79
-6       10 weekend        8.07</code></pre>
-<pre class="r"><code>#We use the lattice plot package, as the figure in GitHub is built that way
+
+#We use the lattice plot package, as the figure in GitHub is built that way
 xyplot(mean_steps~interval|weekdays,data=average_weekdays,type=&quot;l&quot;,layout = c(1,2),
        main=&quot;Average steps (imputed) per interval and type of day&quot;,
        ylab=&quot;Average number of steps&quot;,xlab=&quot;Interval [5-min increments]&quot;)</code></pre>

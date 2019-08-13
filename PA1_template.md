@@ -17,9 +17,12 @@ output:
 ```r
 #Unzip the data folder
 zip_in <-  "C:/Users/jorge_000/Desktop/ONLINE_COURSES/DATA_SCIENCE_COURSERA/5_REPROD_RESEARCH/RepData_PeerAssessment1/activity.zip"
-out <- "C:/Users/jorge_000/Desktop/ONLINE_COURSES/DATA_SCIENCE_COURSERA/5_REPROD_RESEARCH/RepData_PeerAssessment1/activity"
-unzip(zip_in,exdir = out)
+zip_out <- "C:/Users/jorge_000/Desktop/ONLINE_COURSES/DATA_SCIENCE_COURSERA/5_REPROD_RESEARCH/RepData_PeerAssessment1/activity"
+unzip(zip_in,zip_out)
+```
 
+
+```r
 ##Read the data
 activity <- read.csv("activity/activity.csv",header = TRUE,na.strings = c("NA","<NA>"))
 
@@ -78,7 +81,7 @@ hist(daily_steps$steps, xlab = "Number of steps/day", main = "Histogram of daily
 abline(v = mean_steps, col = "blue",lwd = 2) 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 
 
@@ -101,7 +104,7 @@ with(interval_steps,plot(interval,steps,type = "l",xlab = "5-minute interval",
      ylab = "Number of steps",main = "Time series of the mean steps per interval"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 
 
@@ -333,7 +336,7 @@ with(total_steps2,hist(steps,xlab = "Number of steps",main = c("Daily steps fill
 abline(v = total_mean_steps2,col = "blue",lwd = 2)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 
 
@@ -384,29 +387,13 @@ table(activity3$weekdays)
 average_weekdays <- activity3 %>%
     group_by(interval,weekdays) %>%
     summarise(mean_steps = mean(steps))
-head(average_weekdays)
-```
 
-```
-# A tibble: 6 x 3
-# Groups:   interval [3]
-  interval weekdays mean_steps
-     <int> <chr>         <dbl>
-1        0 week           6.65
-2        0 weekend        8.07
-3        5 week           5.03
-4        5 weekend        8.07
-5       10 week           4.79
-6       10 weekend        8.07
-```
-
-```r
 #We use the lattice plot package, as the figure in GitHub is built that way
 xyplot(mean_steps~interval|weekdays,data=average_weekdays,type="l",layout = c(1,2),
        main="Average steps (imputed) per interval and type of day",
        ylab="Average number of steps",xlab="Interval [5-min increments]")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
 
 

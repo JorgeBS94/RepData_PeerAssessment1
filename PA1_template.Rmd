@@ -20,12 +20,14 @@ library(lattice)
 
 ## Loading and preprocessing the data
 
-```{r}
+```{r,eval = FALSE}
 #Unzip the data folder
 zip_in <-  "C:/Users/jorge_000/Desktop/ONLINE_COURSES/DATA_SCIENCE_COURSERA/5_REPROD_RESEARCH/RepData_PeerAssessment1/activity.zip"
-out <- "C:/Users/jorge_000/Desktop/ONLINE_COURSES/DATA_SCIENCE_COURSERA/5_REPROD_RESEARCH/RepData_PeerAssessment1/activity"
-unzip(zip_in,exdir = out)
+zip_out <- "C:/Users/jorge_000/Desktop/ONLINE_COURSES/DATA_SCIENCE_COURSERA/5_REPROD_RESEARCH/RepData_PeerAssessment1/activity"
+unzip(zip_in,zip_out)
+```
 
+```{r}
 ##Read the data
 activity <- read.csv("activity/activity.csv",header = TRUE,na.strings = c("NA","<NA>"))
 
