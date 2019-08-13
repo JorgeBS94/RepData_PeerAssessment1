@@ -80,6 +80,8 @@ abline(v = mean_steps, col = "blue",lwd = 2)
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
+
+
 ## What is the average daily activity pattern?
 
 ### 1. Make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
@@ -96,10 +98,12 @@ interval_steps <- new_activity %>%
 
 #Make the plot
 with(interval_steps,plot(interval,steps,type = "l",xlab = "5-minute interval", 
-     ylab = "Number of steps"))
+     ylab = "Number of steps",main = "Time series of the mean steps per interval"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+
+
 
 ### 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -132,7 +136,7 @@ sum(apply(activity,1,function(x){sum(is.na(x))}))
 
 ### 2. Devise a strategy for filling in all of the missing values in the dataset. 
 
-**A. We try as strategy replacing the NAs by the mean of that day:**
+**1. We try as strategy replacing the NAs by the mean of that day:**
 
 To do so, we will use the activity dataframe, group it by the "date" variable and then compute the mean number of steps each day. Then, we will merge the resulting dataframe with activity in order to obtain a column with the mean number of steps each day. Having the correct dimensions, we will substitute the NA values in activity by the corresponding mean values calculated.
 
@@ -180,7 +184,7 @@ head(merged_data,10)
 10 2012-10-01    NA       45              0
 ```
 
-**B. We try as strategy replacing the NAs by the mean of that 5-minute interval:**
+**2. We try as strategy replacing the NAs by the mean of that 5-minute interval:**
 
 We basically do the same as above, but we use the "interval_steps" variable we computed above. Then, we merge the data and perform the substitution as before.
 
@@ -329,7 +333,9 @@ with(total_steps2,hist(steps,xlab = "Number of steps",main = c("Daily steps fill
 abline(v = total_mean_steps2,col = "blue",lwd = 2)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+
+
 
 ### 4.2 Do these values differ from the estimates from the first part of the assignment? 
 
@@ -401,4 +407,6 @@ xyplot(mean_steps~interval|weekdays,data=average_weekdays,type="l",layout = c(1,
        ylab="Average number of steps",xlab="Interval [5-min increments]")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
+
+
